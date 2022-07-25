@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    {% extends "base.html" %}
+    {% block content %}
+    <body class="container">
+    <h1>Password Analysis report:</h1> 
+    <h1><b>User_name: </b>{{session['user_name']}}</h1>
+    <br>
+    <h1><b>Password: </b>{{session['password']}}</h1>
+    {% if session['password']|length < 8 %}
+    <h1> Requirement #1 not satisfied. Please change your password. It must be atleast 8 characters long.</h1>
+    <h1>Hit the Home Page button and Re-Enter the new password</h1>
+
+   {% elif session['password'] is lower %}
+    <h1>Requirement #2 not satisfied. The password entered by you contain only lower case letters. </h1>
+    <h1>Please include atleast one upper case letter.</h1>
+    <h1>Hit the Home Page button and Re-Enter the new password</h1>
+
+    {% elif session['password'] is upper %}
+    <h1>Requirement #3 not satisfied. The password entered by you contain only upper case letters. </h1>
+    <h1>Please include atleast one lower case letter.</h1>
+    <h1>Hit the Home Page button and Re-Enter the new password</h1>
+
+    {% elif session['password'][-1]|int == 0 %}
+    <h1>Requirement #4 not satisfied. The passowrd entered by you does not end with an integer. </h1>
+    <h1>Hit the Home Page button and Re-Enter the new password</h1>
+
+    {% else %}
+    <h1> The password you entered satisfies all the Requirements. </h1>
+    {% endif %}
+    
+    </body>
+    {% endblock %}
+
+</html>
